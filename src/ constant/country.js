@@ -1,4 +1,4 @@
-export const OLYMPIC_COUNTRIES = [
+const OLYMPIC_COUNTRIES = [
 	'가나',
 	'가봉',
 	'가이아나',
@@ -194,3 +194,5 @@ export const OLYMPIC_COUNTRIES = [
 	'헝가리',
 	'홍콩',
 ];
+
+export default OLYMPIC_COUNTRIES;

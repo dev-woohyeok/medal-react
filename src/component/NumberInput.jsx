@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 function NumberInput({ label, value, onChange }) {
 	return (
 		<label>
