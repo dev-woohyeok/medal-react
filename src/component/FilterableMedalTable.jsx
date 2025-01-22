@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import OLYMPIC_COUNTRIES from '../ constant/country';
+import OLYMPIC_COUNTRIES from '../constant/country';
 import Selector from './Selector';
 import NumberInput from './NumberInput';
 import MedalTable from './MedalTable';
+import styles from '../css/FilterableMedalTable.module.css';
 
 function FilterableMedalTable() {
 	const [country, setCountry] = useState('');
@@ -78,41 +79,47 @@ function FilterableMedalTable() {
 	}
 
 	return (
-		<div>
-			<h1>메달 통계</h1>
-			<form action="submit">
-				<Selector
-					options={OLYMPIC_COUNTRIES}
-					value={country}
-					onChange={setCountry}
-				/>
-				<NumberInput label="금메달" value={gold} onChange={setGold} />
-				<NumberInput
-					label="은메달"
-					value={silver}
-					onChange={setSilver}
-				/>
-				<NumberInput
-					label="동메달"
-					value={bronze}
-					onChange={setBronze}
-				/>
-				<button onClick={handleCreate}>등록</button>
-				<button onClick={handleUpdate}>수정</button>
-				<label>
-					총메달수로 비교하기
-					<input
-						type="checkbox"
-						value={isTotalOnly}
-						onChange={handleIsTotalOnly}
+		<div className={styles.wrapper}>
+			<div className={styles.container}>
+				<h1 className={styles.title}>메달 통계</h1>
+				<form>
+					<Selector
+						options={OLYMPIC_COUNTRIES}
+						value={country}
+						onChange={setCountry}
 					/>
-				</label>
-			</form>
-			<MedalTable
-				records={records}
-				onDeleteRecord={setRecords}
-				isTotalOnly={isTotalOnly}
-			/>
+					<NumberInput
+						label="금메달"
+						value={gold}
+						onChange={setGold}
+					/>
+					<NumberInput
+						label="은메달"
+						value={silver}
+						onChange={setSilver}
+					/>
+					<NumberInput
+						label="동메달"
+						value={bronze}
+						onChange={setBronze}
+					/>
+					<button onClick={handleCreate}>등록</button>
+					<button onClick={handleUpdate}>수정</button>
+					<label>
+						총메달수로 비교하기
+						<input
+							type="checkbox"
+							value={isTotalOnly}
+							onChange={handleIsTotalOnly}
+						/>
+					</label>
+				</form>
+				<MedalTable
+					records={records}
+					onDeleteRecord={setRecords}
+					isTotalOnly={isTotalOnly}
+				/>
+			</div>
 		</div>
 	);
 }
