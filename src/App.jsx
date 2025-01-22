@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { OLYMPIC_COUNTRIES } from './ constant/country';
+import Selector from './component/Selector';
+import NumberInput from './component/NumberInput';
 
 function App() {
-  const [count, setCount] = useState(0)
+	const [country, setCountry] = useState('');
+	const [gold, setGold] = useState(0);
+	const [silver, setSilver] = useState(0);
+	const [bronze, setBronze] = useState(0);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	console.log(country);
+	return (
+		<div>
+			<h1 className="title">메달 통계</h1>
+			<form className="" action="submit">
+				<Selector
+					options={OLYMPIC_COUNTRIES}
+					value={country}
+					onChange={setCountry}
+				/>
+				<NumberInput label="금메달" value={gold} onChange={setGold} />
+				<NumberInput
+					label="은메달"
+					value={silver}
+					onChange={setSilver}
+				/>
+				<NumberInput
+					label="동메달"
+					value={bronze}
+					onChange={setBronze}
+				/>
+				<button>등록</button>
+				<button>수정</button>
+			</form>
+		</div>
+	);
 }
 
-export default App
+export default App;
