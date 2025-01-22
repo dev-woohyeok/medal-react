@@ -8,17 +8,19 @@ function MedalTable({ records, onDeleteRecord, isTotalOnly }) {
 			return newData;
 		});
 	}
-
 	// 필터 설정에 따라 정렬 방식 변경
 	isTotalOnly
-		? records.sort(
-				(a, b) =>
-					b.gold +
-					b.silver +
-					b.bronze -
-					(a.gold + a.silver + a.bronze),
-		  )
-		: records.sort((a, b) => b.gold - a.gold);
+		? records.sort((a, b) => {
+				const totalA = a.gold + a.silver + a.bronze;
+				const totalB = b.gold + b.silver + b.bronze;
+
+				if (totalA !== totalB) return totalB - totalA;
+				return a.country.localeCompare(b.country);
+		  })
+		: records.sort((a, b) => {
+				if (a.gold !== b.gold) return b.gold - a.gold;
+				return a.country.localeCompare(b.country);
+		  });
 
 	return (
 		<table>

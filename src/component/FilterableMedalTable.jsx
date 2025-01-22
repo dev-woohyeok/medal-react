@@ -22,6 +22,7 @@ function FilterableMedalTable() {
 			alert('국가를 선택해주세요.');
 			return;
 		}
+
 		// 중복 방지 알림
 		if (records.some((item) => item.country === country)) {
 			alert('이미 등록된 국가입니다.');
@@ -31,9 +32,9 @@ function FilterableMedalTable() {
 		// 로컬스토리지에 등록하기
 		const newRecord = { country, gold, silver, bronze };
 		setRecords((prev) => {
-			const updatedData = [...prev, newRecord];
-			localStorage.setItem('records', JSON.stringify(updatedData));
-			return updatedData;
+			const updateRecords = [...prev, newRecord];
+			localStorage.setItem('records', JSON.stringify(updateRecords));
+			return updateRecords;
 		});
 
 		// 폼초기화
@@ -57,12 +58,19 @@ function FilterableMedalTable() {
 
 		// 로컬스토리지에 수정하기
 		setRecords((prev) => {
-			prev.filter((record) => {
-				return record.country === country
-					? { country, gold, silver, bronze }
-					: record;
+			const newRecords = { country, gold, silver, bronze };
+			const updatedRecords = prev.map((item) => {
+				return item.country === country ? newRecords : item;
 			});
+			localStorage.setItem('records', JSON.stringify(updatedRecords));
+			return updatedRecords;
 		});
+
+		// 폼초기화
+		setCountry('');
+		setGold(0);
+		setSilver(0);
+		setBronze(0);
 	}
 
 	function handleIsTotalOnly(e) {
@@ -91,11 +99,14 @@ function FilterableMedalTable() {
 				/>
 				<button onClick={handleCreate}>등록</button>
 				<button onClick={handleUpdate}>수정</button>
-				<input
-					type="checkbox"
-					value={isTotalOnly}
-					onChange={handleIsTotalOnly}
-				/>
+				<label>
+					총메달수로 비교하기
+					<input
+						type="checkbox"
+						value={isTotalOnly}
+						onChange={handleIsTotalOnly}
+					/>
+				</label>
 			</form>
 			<MedalTable
 				records={records}
