@@ -1,0 +1,32 @@
+.btn {
+	color: white;
+	border: none;
+	border-radius: 0.5rem;
+	padding: 0.7rem 1.5rem;
+	font-size: calc(5px + 1vmin);
+	cursor: pointer;
+}
+
+.update {
+	background-color: #4caf50;
+}
+
+.update:hover {
+	background-color: #45a049;
+}
+
+.create {
+	background-color: #2196f3;
+}
+
+.create:hover {
+	background-color: #1e87db;
+}
+
+.delete {
+	background-color: #f44336;
+}
+
+.delete:hover {
+	background-color: #da190b;
+}

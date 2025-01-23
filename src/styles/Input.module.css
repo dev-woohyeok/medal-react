@@ -1,0 +1,17 @@
+.label {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	justify-content: center;
+}
+
+.label_text {
+	white-space: nowrap;
+}
+
+.input {
+	border: 1px solid #ccc;
+	padding: 10px;
+	font-size: calc(6px + 1vmin);
+	width: 100%;
+}
