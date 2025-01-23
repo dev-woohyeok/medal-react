@@ -4,7 +4,6 @@ import Selector from './Selector';
 import Input from './Input';
 import MedalTable from './MedalTable';
 import styles from '../styles/FilterableMedalTable.module.css';
-import styles_btn from '../styles/Button.module.css';
 import Button from './Button';
 
 function FilterableMedalTable() {
