@@ -5,16 +5,12 @@ table {
 	font-weight: bold;
 }
 
-td {
-	border: solid 1px #000;
-	border-style: solid none solid none;
-	padding: 10px;
+th {
+	padding: 1rem;
 }
 
-th {
-	border: solid 1px #000;
-	border-style: none none solid none;
-	padding: 10px;
+td {
+	padding: 1rem;
 }
 
 tr:first-child th:first-child {

@@ -9,15 +9,6 @@ export const MEDALTABLE_RANKING_COLOR = {
 };
 
 /**
- * 버튼 색상 타입
- */
-export const BUTTON_COLOR = {
-	RED: 'red',
-	BLUE: 'blue',
-	GREEN: 'green',
-};
-
-/**
  * 파리 올림픽 참가 국가 목록 : 메달 테이블에 등록 가능한 국가
  */
 export const OLYMPIC_COUNTRIES_LIST = [
