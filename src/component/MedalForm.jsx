@@ -1,9 +1,12 @@
-function MedalForm() {
+import { OLYMPIC_COUNTRIES_LIST } from '../constant/type';
+import styles from '../styles/MedalForm.module.css';
+
+function MedalForm(stateForm, setStateForm, records, setRecords) {
 	return (
 		<form className={styles.form}>
 			<Selector
 				label="국가"
-				options={OLYMPIC_COUNTRIES}
+				options={OLYMPIC_COUNTRIES_LIST}
 				value={state.country}
 				onChange={(value) =>
 					setState((prev) => ({ ...prev, country: value }))
@@ -33,8 +36,10 @@ function MedalForm() {
 				}
 				type="number"
 			/>
-			<Button label="등록" type="create" onClick={handleCreate} />
-			<Button label="수정" type="update" onClick={handleUpdate} />
+			<Button onClick={handleCreate} color="g">
+				등록
+			</Button>
+			<Button onClick={handleUpdate}>수정</Button>
 			<label>
 				총점 비교
 				<input

@@ -26,11 +26,3 @@
 	font-size: 4rem;
 	margin-bottom: 3rem;
 }
-
-.form {
-	display: flex;
-	gap: 1.5rem;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-}

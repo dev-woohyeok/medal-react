@@ -1,4 +1,5 @@
 import styles from './App.module.css';
+import MedalTable from './component/MedalTable';
 import MedalForm from './component/MedalForm';
 
 function App() {
@@ -103,9 +104,20 @@ function App() {
 				<h1 className={styles.title}>메달 통계</h1>
 				<MedalForm />
 				<MedalTable
-					records={state.records}
-					onDeleteRecord={() => setState}
-					isTotalOnly={state.isTotalOnly}
+					records={stateRecords}
+					onDeleteRecord={(idx) =>
+						setStateRecords((prev) => {
+							const deletedRecords = prev.filter(
+								(_, i) => i !== idx,
+							);
+							localStorage.setItem(
+								'records',
+								JSON.stringify(deletedRecords),
+							);
+							return deletedRecords;
+						})
+					}
+					isTotalOnly={stateForm.isTotalOnly}
 				/>
 			</div>
 		</div>
