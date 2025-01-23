@@ -9,9 +9,39 @@
 	white-space: nowrap;
 }
 
-.input {
+input[type='number'] {
 	border: 1px solid #ccc;
 	padding: 10px;
 	font-size: calc(6px + 1vmin);
 	width: 100%;
+	border-radius: 0.625rem;
+}
+
+input[type='checkbox'] {
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 0.625rem;
+	border: 1px solid #999;
+	appearance: none; /* 기본 체크 표시 제거 */
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+input[type='checkbox']:checked {
+	background: #2b4de5;
+	border: none;
+}
+
+input[type='checkbox']:checked::after {
+	content: '';
+	display: block;
+	width: 6px;
+	height: 14px;
+	border: solid #fff;
+	border-width: 0 4px 4px 0;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: relative;
+	top: calc(50% - 12px);
+	left: calc(50% - 6px);
 }

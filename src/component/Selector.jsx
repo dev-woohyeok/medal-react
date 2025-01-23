@@ -3,9 +3,10 @@ import style_input from '../styles/Input.module.css';
 function Selector({
 	options = [],
 	onChange,
-	value = '',
 	label,
+	value = '',
 	placeholder = '선택해주세요',
+	...props
 }) {
 	return (
 		<label className={style_input.label}>
@@ -13,7 +14,8 @@ function Selector({
 			<select
 				className={style_input.input}
 				value={value}
-				onChange={(e) => onChange(e.target.value)}
+				onChange={onChange}
+				{...props}
 			>
 				<option value="" disabled hidden>
 					{placeholder}

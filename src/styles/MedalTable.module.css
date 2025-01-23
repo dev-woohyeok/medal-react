@@ -2,7 +2,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 	width: 100%;
-	font-weight: bold;
 }
 
 th {
@@ -28,7 +27,7 @@ tr:last-child td:last-child {
 }
 
 .thead {
-	background-color: #bccff5;
+	background-color: #000000;
 	color: white;
 }
 
@@ -50,4 +49,8 @@ tr:last-child td:last-child {
 
 .other {
 	background-color: #f0f0f0;
+}
+
+.other:nth-child(2n) {
+	background-color: #e0e0e0;
 }

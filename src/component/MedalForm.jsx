@@ -1,30 +1,35 @@
-import { OLYMPIC_COUNTRIES_LIST } from '../constant/type';
+import { TYPE_LOCALSTORAGE, TYPE_STATEFORM } from '../constant/type';
+
 import styles from '../styles/MedalForm.module.css';
 import Selector from './Selector';
 import Input from './Input';
 import Button from './Button';
-import PropTypes from 'prop-types';
+import { OLYMPIC_COUNTRIES_LIST } from '../constant/constant';
 
 function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 	function handleCreate(e) {
 		e.preventDefault();
-		if (!stateForm.country) {
+		if (!stateForm[TYPE_STATEFORM.COUNTRY]) {
 			alert('국가를 선택해주세요.');
 			return;
 		}
 
 		// 중복 방지 알림
-		if (stateRecords.some((item) => item.country === stateForm.country)) {
+		if (
+			stateRecords.some(
+				(item) => item.country === stateForm[TYPE_STATEFORM.COUNTRY],
+			)
+		) {
 			alert('이미 등록된 국가입니다.');
 			return;
 		}
 
 		setStateRecords((prevState) => {
 			const newRecord = {
-				country: stateForm.country,
-				gold: stateForm.gold,
-				silver: stateForm.silver,
-				bronze: stateForm.bronze,
+				country: stateForm[TYPE_STATEFORM.COUNTRY],
+				gold: stateForm[TYPE_STATEFORM.GOLD],
+				silver: stateForm[TYPE_STATEFORM.SILVER],
+				bronze: stateForm[TYPE_STATEFORM.BRONZE],
 			};
 			const updatedRecords = [...prevState, newRecord];
 			localStorage.setItem('records', JSON.stringify(updatedRecords));
@@ -41,12 +46,16 @@ function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 
 	function handleUpdate(e) {
 		e.preventDefault();
-		if (!stateForm.country) {
+		if (!stateForm[TYPE_STATEFORM.COUNTRY]) {
 			alert('국가를 선택해주세요.');
 			return;
 		}
 		// 국가 존재 여부 확인
-		if (!stateRecords.some((item) => item.country === stateForm.country)) {
+		if (
+			!stateRecords.some(
+				(item) => item.country === stateForm[TYPE_STATEFORM.COUNTRY],
+			)
+		) {
 			alert('해당 국가는 등록되지 않은 국가입니다.');
 			return;
 		}
@@ -54,15 +63,20 @@ function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 		// 수정해야하는 국가 메달 업데이트 하기
 		setStateRecords((prevState) => {
 			const newRecord = {
-				country: stateForm.country,
-				gold: stateForm.gold,
-				silver: stateForm.silver,
-				bronze: stateForm.bronze,
+				country: stateForm[TYPE_STATEFORM.COUNTRY],
+				gold: stateForm[TYPE_STATEFORM.GOLD],
+				silver: stateForm[TYPE_STATEFORM.SILVER],
+				bronze: stateForm[TYPE_STATEFORM.BRONZE],
 			};
 			const updatedRecords = prevState.map((item) =>
-				item.country === stateForm.country ? newRecord : item,
+				item.country === stateForm[TYPE_STATEFORM.COUNTRY]
+					? newRecord
+					: item,
 			);
-			localStorage.setItem('records', JSON.stringify(updatedRecords));
+			localStorage.setItem(
+				TYPE_LOCALSTORAGE.MEDALS_RECORD_LIST,
+				JSON.stringify(updatedRecords),
+			);
 			return updatedRecords;
 		});
 		setStateForm({
@@ -72,6 +86,14 @@ function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 			bronze: 0,
 			country: '',
 		});
+	}
+
+	function handleOnChange(e, medalType) {
+		const value = parseInt(e.target.value) || '';
+		setStateForm((prev) => ({
+			...prev,
+			[medalType]: value,
+		}));
 	}
 
 	function handleIsTotalOnly(e) {
@@ -86,7 +108,7 @@ function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 			<Selector
 				label="국가"
 				options={OLYMPIC_COUNTRIES_LIST}
-				value={stateForm.country}
+				value={stateForm[TYPE_STATEFORM.COUNTRY]}
 				onChange={(e) => {
 					setStateForm((prev) => ({
 						...prev,
@@ -96,39 +118,38 @@ function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 			/>
 			<Input
 				label="금메달"
-				value={stateForm.gold}
-				onChange={(e) => {
-					const value = parseInt(e.target.value) || '';
-					setStateForm((prev) => ({ ...prev, gold: value }));
-				}}
+				value={stateForm[TYPE_STATEFORM.GOLD]}
+				onChange={(e) => handleOnChange(e, TYPE_STATEFORM.GOLD)}
+				onFocus={(e) => e.target.select()}
 				type="number"
+				min={0}
 			/>
 			<Input
 				label="은메달"
-				value={stateForm.silver}
-				onChange={(e) => {
-					const value = parseInt(e.target.value) || '';
-					setStateForm((prev) => ({ ...prev, silver: value }));
-				}}
+				value={stateForm[TYPE_STATEFORM.SILVER]}
+				onChange={(e) => handleOnChange(e, TYPE_STATEFORM.SILVER)}
+				onFocus={(e) => e.target.select()}
 				type="number"
+				min={0}
 			/>
 			<Input
 				label="동메달"
-				value={stateForm.bronze}
-				onChange={(value) =>
-					setStateForm((prev) => ({ ...prev, bronze: value }))
-				}
+				value={stateForm[TYPE_STATEFORM.BRONZE]}
+				onChange={(e) => handleOnChange(e, TYPE_STATEFORM.BRONZE)}
+				onFocus={(e) => e.target.select()}
 				type="number"
+				min={0}
 			/>
-			<Button onClick={handleCreate} color="g">
+			<Button onClick={handleCreate} color="blue">
 				등록
 			</Button>
-			<Button onClick={handleUpdate}>수정</Button>
-
+			<Button onClick={handleUpdate} color="green">
+				수정
+			</Button>
 			<Input
 				label="총점 비교"
 				type="checkbox"
-				checked={stateForm.isTotalOnly}
+				checked={stateForm[TYPE_STATEFORM.IS_TOTAL_ONLY]}
 				onChange={handleIsTotalOnly}
 			/>
 		</form>
