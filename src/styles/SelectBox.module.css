@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	position: relative;
+	gap: 1rem;
+	align-items: center;
+	justify-content: center;
+}
+
+.list {
+	position: absolute;
+	width: 200px;
+	max-height: 200px;
+	overflow-y: auto;
+	top: 50px;
+	left: 4rem;
+	background-color: #fff;
+	border-radius: 0.625rem;
+	border: 1px solid #e6e6e6;
+	z-index: 10;
+}
+
+.item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+	font-size: 1rem;
+	background-color: white;
+	border-bottom: 1px solid #e6e6e6;
+	cursor: pointer;
+}
+
+.item:hover {
+	background-color: #f9f9f9;
+}

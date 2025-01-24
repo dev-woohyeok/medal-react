@@ -9,11 +9,11 @@
 	white-space: nowrap;
 }
 
-.input {
+input {
 	border: 1px solid #ccc;
 	padding: 10px;
+	width: 200px;
 	font-size: calc(6px + 1vmin);
-	width: 100%;
 	border-radius: 0.625rem;
 }
 
@@ -21,7 +21,6 @@ input[type='number'] {
 	border: 1px solid #ccc;
 	padding: 10px;
 	font-size: calc(6px + 1vmin);
-	width: 100%;
 	border-radius: 0.625rem;
 }
 

@@ -1,5 +1,7 @@
 import { TYPE_MEDAL } from './type';
-
+// 파일명이 constant.js 인데
+// 의도와 다르게 이상한 상수를 정의하고 있음
+// 차후 변경이 필요할듯
 export const MEDALTABLE_RANKING_COLOR = {
 	0: TYPE_MEDAL.GOLD,
 	1: TYPE_MEDAL.SILVER,

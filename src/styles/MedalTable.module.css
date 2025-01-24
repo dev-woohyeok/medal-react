@@ -27,12 +27,20 @@ tr:last-child td:last-child {
 }
 
 .thead {
-	background-color: #000000;
+	background-color: #005799;
 	color: white;
 }
 
 .tbody {
 	text-align: center;
+}
+
+.no-record {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 4rem;
 }
 
 .gold {

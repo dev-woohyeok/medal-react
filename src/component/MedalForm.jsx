@@ -1,4 +1,4 @@
-import { TYPE_LOCALSTORAGE, TYPE_STATEFORM } from '../constant/type';
+import { TYPE_LOCALSTORAGE, STATE_FORM } from '../constant/type';
 
 import styles from '../styles/MedalForm.module.css';
 import Input from './Input';
@@ -7,69 +7,89 @@ import { OLYMPIC_COUNTRIES_LIST } from '../constant/constant';
 import SelectBox from './SelectBox';
 
 function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
+	/**
+	 * 차후 코드 작성시 비지니스 로직들은 부모 컴퍼넌트로부터 이벤트핸들러를 전달받아서 사용하는것으로 하고,
+	 * 자식에서 반복적으로 호출되는 동일한 컴퍼넌트들의 경우 객체를 통해 관리하는 방식으로 변경하는 것을 고려하자.
+	 */
+
+	function resetForm() {
+		setStateForm((prev) => ({
+			...prev,
+			gold: 0,
+			silver: 0,
+			bronze: 0,
+			country: '',
+		}));
+	}
+
 	function handleCreate(e) {
 		e.preventDefault();
-		if (!stateForm[TYPE_STATEFORM.COUNTRY]) {
+		if (!stateForm[STATE_FORM.COUNTRY]) {
 			alert('국가를 선택해주세요.');
+			resetForm();
 			return;
 		}
 
-		// 중복 방지 알림
 		if (
 			stateRecords.some(
-				(item) => item.country === stateForm[TYPE_STATEFORM.COUNTRY],
+				(item) => item.country === stateForm[STATE_FORM.COUNTRY],
 			)
 		) {
 			alert('이미 등록된 국가입니다.');
+			resetForm();
+			return;
+		}
+
+		if (
+			OLYMPIC_COUNTRIES_LIST.indexOf(stateForm[STATE_FORM.COUNTRY]) === -1
+		) {
+			alert('등록할 수 없는 국가입니다.');
+			resetForm();
 			return;
 		}
 
 		setStateRecords((prevState) => {
 			const newRecord = {
-				country: stateForm[TYPE_STATEFORM.COUNTRY],
-				gold: stateForm[TYPE_STATEFORM.GOLD],
-				silver: stateForm[TYPE_STATEFORM.SILVER],
-				bronze: stateForm[TYPE_STATEFORM.BRONZE],
+				country: stateForm[STATE_FORM.COUNTRY],
+				gold: stateForm[STATE_FORM.GOLD],
+				silver: stateForm[STATE_FORM.SILVER],
+				bronze: stateForm[STATE_FORM.BRONZE],
 			};
 			const updatedRecords = [...prevState, newRecord];
 			localStorage.setItem('records', JSON.stringify(updatedRecords));
 			return updatedRecords;
 		});
-		setStateForm({
-			...stateForm,
-			gold: 0,
-			silver: 0,
-			bronze: 0,
-			country: '',
-		});
+
+		resetForm();
 	}
 
 	function handleUpdate(e) {
 		e.preventDefault();
-		if (!stateForm[TYPE_STATEFORM.COUNTRY]) {
+		if (!stateForm[STATE_FORM.COUNTRY]) {
 			alert('국가를 선택해주세요.');
-			return;
-		}
-		// 국가 존재 여부 확인
-		if (
-			!stateRecords.some(
-				(item) => item.country === stateForm[TYPE_STATEFORM.COUNTRY],
-			)
-		) {
-			alert('해당 국가는 등록되지 않은 국가입니다.');
+			resetForm();
 			return;
 		}
 
-		// 수정해야하는 국가 메달 업데이트 하기
+		if (
+			!stateRecords.some(
+				(item) => item.country === stateForm[STATE_FORM.COUNTRY],
+			)
+		) {
+			alert('해당 국가는 등록되지 않은 국가입니다.');
+			resetForm();
+			return;
+		}
+
 		setStateRecords((prevState) => {
 			const newRecord = {
-				country: stateForm[TYPE_STATEFORM.COUNTRY],
-				gold: stateForm[TYPE_STATEFORM.GOLD],
-				silver: stateForm[TYPE_STATEFORM.SILVER],
-				bronze: stateForm[TYPE_STATEFORM.BRONZE],
+				country: stateForm[STATE_FORM.COUNTRY],
+				gold: stateForm[STATE_FORM.GOLD],
+				silver: stateForm[STATE_FORM.SILVER],
+				bronze: stateForm[STATE_FORM.BRONZE],
 			};
 			const updatedRecords = prevState.map((item) =>
-				item.country === stateForm[TYPE_STATEFORM.COUNTRY]
+				item.country === stateForm[STATE_FORM.COUNTRY]
 					? newRecord
 					: item,
 			);
@@ -79,13 +99,7 @@ function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 			);
 			return updatedRecords;
 		});
-		setStateForm({
-			...stateForm,
-			gold: 0,
-			silver: 0,
-			bronze: 0,
-			country: '',
-		});
+		resetForm();
 	}
 
 	function handleOnChange(e, medalType) {
@@ -104,38 +118,49 @@ function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 	}
 
 	return (
-		<form className={styles.form}>
+		<form
+			className={styles.form}
+			onSubmit={(e) => {
+				e.preventDefault();
+			}}
+		>
 			<SelectBox
-				label="국가"
-				options={OLYMPIC_COUNTRIES_LIST}
-				value={stateForm[TYPE_STATEFORM.COUNTRY]}
-				onChange={(e) => {
+				items={OLYMPIC_COUNTRIES_LIST}
+				value={stateForm[STATE_FORM.COUNTRY]}
+				onSelect={(value) =>
 					setStateForm((prev) => ({
 						...prev,
-						country: e.target.value,
-					}));
-				}}
-			/>
+						country: value,
+					}))
+				}
+			>
+				<SelectBox.Input
+					label="국가"
+					placeholder="국가를 선택해주세요"
+				/>
+				<SelectBox.List />
+			</SelectBox>
+
 			<Input
 				label="금메달"
-				value={stateForm[TYPE_STATEFORM.GOLD]}
-				onChange={(e) => handleOnChange(e, TYPE_STATEFORM.GOLD)}
+				value={stateForm[STATE_FORM.GOLD]}
+				onChange={(e) => handleOnChange(e, STATE_FORM.GOLD)}
 				onFocus={(e) => e.target.select()}
 				type="number"
 				min={0}
 			/>
 			<Input
 				label="은메달"
-				value={stateForm[TYPE_STATEFORM.SILVER]}
-				onChange={(e) => handleOnChange(e, TYPE_STATEFORM.SILVER)}
+				value={stateForm[STATE_FORM.SILVER]}
+				onChange={(e) => handleOnChange(e, STATE_FORM.SILVER)}
 				onFocus={(e) => e.target.select()}
 				type="number"
 				min={0}
 			/>
 			<Input
 				label="동메달"
-				value={stateForm[TYPE_STATEFORM.BRONZE]}
-				onChange={(e) => handleOnChange(e, TYPE_STATEFORM.BRONZE)}
+				value={stateForm[STATE_FORM.BRONZE]}
+				onChange={(e) => handleOnChange(e, STATE_FORM.BRONZE)}
 				onFocus={(e) => e.target.select()}
 				type="number"
 				min={0}
@@ -149,7 +174,7 @@ function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 			<Input
 				label="총점 비교"
 				type="checkbox"
-				checked={stateForm[TYPE_STATEFORM.IS_TOTAL_ONLY]}
+				checked={stateForm[STATE_FORM.IS_TOTAL_ONLY]}
 				onChange={handleIsTotalOnly}
 			/>
 		</form>
