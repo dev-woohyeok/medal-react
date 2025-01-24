@@ -1,6 +1,6 @@
-import style_input from '../styles/Input.module.css';
+import styles from '../styles/Input.module.css';
 
-function Selector({
+function SelectBox({
 	options = [],
 	onChange,
 	label,
@@ -9,10 +9,10 @@ function Selector({
 	...props
 }) {
 	return (
-		<label className={style_input.label}>
-			<span className={style_input.label_text}>{label}</span>
+		<label className={styles.label}>
+			<span className={styles.label_text}>{label}</span>
 			<select
-				className={style_input.input}
+				className={styles.input}
 				value={value}
 				onChange={onChange}
 				{...props}
@@ -31,4 +31,4 @@ function Selector({
 	);
 }
 
-export default Selector;
+export default SelectBox;

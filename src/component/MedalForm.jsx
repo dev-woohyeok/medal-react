@@ -1,10 +1,10 @@
 import { TYPE_LOCALSTORAGE, TYPE_STATEFORM } from '../constant/type';
 
 import styles from '../styles/MedalForm.module.css';
-import Selector from './Selector';
 import Input from './Input';
 import Button from './Button';
 import { OLYMPIC_COUNTRIES_LIST } from '../constant/constant';
+import SelectBox from './SelectBox';
 
 function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 	function handleCreate(e) {
@@ -105,7 +105,7 @@ function MedalForm({ stateForm, setStateForm, stateRecords, setStateRecords }) {
 
 	return (
 		<form className={styles.form}>
-			<Selector
+			<SelectBox
 				label="국가"
 				options={OLYMPIC_COUNTRIES_LIST}
 				value={stateForm[TYPE_STATEFORM.COUNTRY]}
