@@ -38,26 +38,32 @@
 ## 📁 프로젝트 구조
 
 ```markdown
-run_js
-├─ css
-│ ├─ cards.css
-│ ├─ common.css
-│ ├─ footer.css
-│ ├─ header.css
-│ ├─ home.css
-│ ├─ modal.css
-│ └─ search.css
-├─ image
-│ ├─ favicon-16x16.png
-│ ├─ favicon-32x32.png
-│ ├─ favicon-96x96.png
-│ └─ logo.png
-├─js
-│ ├─ common.js
-│ ├─ dummy.js
-│ ├─ home.js
-│ └─ storage.js
-├─ index.html
-└─ README.md
+📦 
+├─ .gitignore
+├─ README.md
+├─ eslint.config.js
+├─ index.css
+├─ index.html
+├─ package.json
+├─ src
+│  ├─ App.jsx
+│  ├─ component
+│  │  ├─ Button.jsx
+│  │  ├─ Input.jsx
+│  │  ├─ MedalForm.jsx
+│  │  ├─ MedalTable.jsx
+│  │  └─ SelectBox.jsx
+│  ├─ constant
+│  │  ├─ constant.js
+│  │  └─ type.js
+│  ├─ main.jsx
+│  └─ styles
+│     ├─ App.module.css
+│     ├─ Button.module.css
+│     ├─ Input.module.css
+│     ├─ MedalTable.module.css
+│     ├─ MedalForm.module.css
+│     └─ SelectBox.module.css
+└─ vite.config.js
 ```
 
