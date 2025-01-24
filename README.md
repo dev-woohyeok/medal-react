@@ -24,7 +24,7 @@
 
 ## 🚀 트러블 슈팅
 
-#### [컴파운드 패턴으로 검색 가능한 Dropdown Select 컴퍼넌트 만들기](https://aboard-particle-0d4.notion.site/React-Dropdown-Select-185ee001a71580d2b2efc7cc318b96d6?pvs=4)
+#### [[컴파운드 패턴으로 검색 가능한 Custom Select 컴퍼넌트 만들기](https://aboard-particle-0d4.notion.site/React-Dropdown-Select-185ee001a71580d2b2efc7cc318b96d6?pvs=4)
 
 #### [25년 1월 23일 코드리뷰 리펙토링](https://aboard-particle-0d4.notion.site/React-25-01-23-184ee001a71580e3a739d7c5e1f81ce0?pvs=4)
 
