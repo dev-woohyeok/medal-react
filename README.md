@@ -1,7 +1,4 @@
-# medal-react
-
-
-# 🎞 Runner's pedia
+# 🎞 Medal-React
 
 ## 📝 프로젝트 소개
 <div>
