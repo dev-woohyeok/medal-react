@@ -29,6 +29,7 @@ export const STLYES_SELECTBOX = {
 	CONTAINER: 'container',
 	LIST: 'list',
 	ITEM: 'item',
+	NO_ITEM: 'no-item',
 	ACTIVE: 'active',
 };
 

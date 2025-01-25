@@ -53,7 +53,7 @@ function SelectInput({ label, placeholder }) {
 	};
 
 	const handleBlur = () => {
-		setIsOpen((prev) => !prev);
+		setIsOpen(false);
 	};
 
 	const handleChange = (e) => {
@@ -88,7 +88,9 @@ function SelectList() {
 	return (
 		<div className={styles[STLYES_SELECTBOX.LIST]}>
 			{filteredItems.length === 0 ? (
-				<div>검색 결과가 없습니다.</div>
+				<div className={styles[STLYES_SELECTBOX.NO_ITEM]}>
+					검색 결과가 없습니다.
+				</div>
 			) : (
 				filteredItems.map((value) => (
 					<ListItem key={value} value={value} />
