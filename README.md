@@ -7,8 +7,9 @@
 </div>
 이 프로젝트는 **React**를 사용하여 구현한 **올림픽 메달 관리 애플리케이션** 입니다. 사용자는 각 국가의 메달 정보를 쉽게 관리하고 CRUD (생성, 조회, 수정, 삭제) 을 이용해 데이터를 조작할 수 있습니다.
 
-![Image](https://github.com/user-attachments/assets/ea477e42-73a3-4e40-a3e6-7c872409def8)
+<br/>
 ![Image](https://github.com/user-attachments/assets/3f7bc3a2-b3a9-4614-86b9-175908b9874a)
+![Image](https://github.com/user-attachments/assets/2f73fc11-19c2-48ec-a23e-2840372975ce)
 
 <br/>
 <br/>
