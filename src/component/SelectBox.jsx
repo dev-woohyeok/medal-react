@@ -1,5 +1,5 @@
 import { useState, useContext, createContext } from 'react';
-import styles from '../styles/SelectBox.module.css';
+import styles from './../styles/SelectBox.module.css';
 import { STLYES_SELECTBOX } from '../constant/type';
 import Input from './Input';
 const SelectContext = createContext();
