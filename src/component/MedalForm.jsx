@@ -1,6 +1,6 @@
 import { TYPE_LOCALSTORAGE, STATE_FORM } from '../constant/type';
 
-import styles from './../styles/MedalForm.module.css';
+import styles from '../styles/MedalForm.module.css';
 import Input from './Input';
 import Button from './Button';
 import { OLYMPIC_COUNTRIES_LIST } from '../constant/constant';

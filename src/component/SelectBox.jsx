@@ -57,6 +57,7 @@ function SelectInput({ label, placeholder }) {
 	};
 
 	const handleChange = (e) => {
+		e.target.value.trim().length > 0 && setIsOpen(true);
 		onSelect(e.target.value);
 	};
 
