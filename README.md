@@ -1,5 +1,4 @@
-![ezgif-5-64666a4ad7](https://github.com/user-attachments/assets/a2da5eeb-a1f9-4066-8574-e4f96457432a)# 🎞 Medal-React
-
+# 🎞 Medal-React
 ## 📝 프로젝트 소개
 
 <div>
